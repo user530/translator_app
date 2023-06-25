@@ -2,8 +2,7 @@ import React from 'react';
 import { useFind, useSubscribe } from 'meteor/react-meteor-data';
 import { User, UsersCollection } from '/imports/api/collections';
 import { UserRow } from '../components';
-import { useTranslator } from '../customHooks/translate';
-import { useMutationObserver } from '../customHooks/mutator';
+import { useMutationObserver, useTranslator } from '../customHooks';
 
 const UsersTable: React.FC = () => {
     const classSelector = '__t';
@@ -51,12 +50,12 @@ const UsersTable: React.FC = () => {
     isLoading ? 
     <div> Loading...</div> :
     <div>
-        <table ref={tableRef}>
+        <table ref={tableRef} className="table table-striped">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Full Name</th>
-                <th>Position</th>
+                <th scope="col">ID</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Position</th>
             </tr>
             </thead>
 
