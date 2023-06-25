@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { LiveMysql, mysqlConnectionSettings} from "meteor/vlasky:mysql";
-import { UsersCollection, User } from '/imports/api/users';
+import { LiveMysql, mysqlConnectionSettings } from "meteor/vlasky:mysql";
+import { UsersCollection, User } from '/imports/api/collections';
+import * as methods from '/imports/api/methods';
 
 // async function insertLink({ title, url }: Pick<Link, 'title' | 'url'>) {
 //   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
@@ -37,16 +38,22 @@ Meteor.startup(async () => {
   // });
 
 
-  const dbCongig: mysqlConnectionSettings = Meteor.settings.mysql; 
-  const liveDb: LiveMysql = new LiveMysql(dbCongig);
+  const dbConfig: mysqlConnectionSettings = Meteor.settings.mysql;
+  const liveDb: LiveMysql = new LiveMysql(dbConfig);
 
-  Meteor.publish('allUsers', function(){
+  Meteor.publish('allUsers', function () {
     return liveDb.select(
       `SELECT * FROM users`,
       null,
       LiveMysql.LiveMysqlKeySelector.Index(),
-      [{table:'users'}]
+      [{ table: 'users' }]
     )
   })
 
+  Meteor.methods({
+    'typeormInit': methods.typeormInit,
+    'getTranslations': methods.getTranslations
+  })
+
+  Meteor.call('typeormInit');
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { User } from '/imports/api/users';
+import { User } from '/imports/api/collections';
 
 interface IUserRow extends User {};
 
