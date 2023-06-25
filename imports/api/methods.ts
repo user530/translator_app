@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import { myDataSource } from '/server/typeorm/data_source';
 import { In } from 'typeorm';
 import { TranslationsEntity, TranslationRow } from '/server/typeorm/entities/'
@@ -13,11 +12,6 @@ export const typeormInit: () => void
         }
     }
 
-
-export type TranslationDict = {
-    [token: string]: string
-}
-
 export const getTranslations = async ({ tokens }: { tokens: string[] }) => {
 
     // Query the database
@@ -30,4 +24,8 @@ export const getTranslations = async ({ tokens }: { tokens: string[] }) => {
         (dictionary, { token, translation }) => ({ ...dictionary, [token]: translation }), {});
 
     return trnsltDict;
+}
+
+export type TranslationDict = {
+    [token: string]: string
 }

@@ -37,7 +37,7 @@ Meteor.startup(async () => {
   //   return LinksCollection.find();
   // });
 
-
+  // Establish DB config using Vlasky:mysql using settings from the file
   const dbConfig: mysqlConnectionSettings = Meteor.settings.mysql;
   const liveDb: LiveMysql = new LiveMysql(dbConfig);
 

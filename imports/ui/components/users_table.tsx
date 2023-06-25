@@ -14,48 +14,38 @@ const UsersTable: React.FC = () => {
     const users: User[] = useFind<User>(() => UsersCollection.find());
 
     // Translator custom hook
-    const {initTranslate, 
-        setInitTranslate, 
-        translate} = useTranslator();
+    const {initTranslate, setInitTranslate, translate} = useTranslator();
 
     // Mutation observer custom hook
-    const {isObserving,
-        setIsObserving,
-        startObserver, 
-        stopObserver} = useMutationObserver(classSelector, 
-            async (elementsToMutate: (Element | Node)[]) => (await translate(elementsToMutate)
-        ))
+    const { isObserving, setIsObserving, startObserver, stopObserver } = useMutationObserver(
+        classSelector, 
+        async (elementsToMutate: (Element | Node)[]) => translate(elementsToMutate))
 
-    // Restart observer when needed
     React.useEffect(() => {
-        console.log('Use effect fired. Users, isObserving, initTranslate:', users, isObserving, initTranslate);
+        // Array of elements with target class
+        const initialElements: Element[] = Array.from(document.querySelectorAll(`.${classSelector}`));
 
-        const initialElements = [...Array.from(document.querySelectorAll(`.${classSelector}`))];
-    
-        console.log('Initial elements', initialElements);
-
+        // Initial translation
         if (!initTranslate && initialElements.length > 0)
         {
             stopObserver();
 
             translate(initialElements);
 
-            console.log('After translate!');
-
             setInitTranslate(true);
         }
 
-    const tableElement: HTMLTableElement | null = tableRef.current;
+        // Checking ref target 
+        const tableElement: HTMLTableElement | null = tableRef.current;
 
-    // Restart observer
-    if (tableElement && !isObserving) {
-      console.log('Observer activation needed!');
-      
-      startObserver(tableElement);
+        // Restart observer if disabled
+        if (tableElement && !isObserving) 
+        {
+            startObserver(tableElement);
 
-      setIsObserving(true);
-    }
-  }, [users, isObserving])
+            setIsObserving(true);
+        }
+    }, [users, isObserving])
 
     return (
     isLoading ? 
