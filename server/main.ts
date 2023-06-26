@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { LiveMysql, mysqlConnectionSettings } from "meteor/vlasky:mysql";
+import { LiveMysql } from "meteor/vlasky:mysql";
 import { callMyMethod, registerMyMethods } from '/imports/api/helpers';
+import { mysqlConnectionSettings } from '/imports/api/types';
 
 Meteor.startup(async () => {
   // Establish DB config using Vlasky:mysql using settings from the file
