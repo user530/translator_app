@@ -13,7 +13,6 @@ export const typeormInit: () => void
     }
 
 export const getTranslations = async ({ tokens }: { tokens: string[] }) => {
-
     // Query the database
     const result: TranslationRow[] = await TranslationsEntity.findBy({
         token: In(tokens)

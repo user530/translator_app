@@ -48,7 +48,9 @@ const UsersTable: React.FC = () => {
 
     return (
     isLoading ? 
-    <div> Loading...</div> :
+    <div className="spinner-border" role="status">
+        <span className="sr-only">Loading...</span>
+    </div> :
     <div>
         <table ref={tableRef} className="table table-striped">
             <thead>

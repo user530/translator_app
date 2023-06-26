@@ -1,6 +1,8 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { TranslationDict } from '/imports/api/methods'
+import { callMyMethod } from '/imports/api/helpers'
+
 
 export const useTranslator = () => {
 
@@ -21,7 +23,7 @@ export const useTranslator = () => {
             // Make tokens array from elements
             const tokens: string[] = elementsToTokens(elementsToTranslate);
 
-            // Translate tokens and prepare translations dictionary
+            // Translate tokens and prepare translations dictionary 
             const translationsDict: TranslationDict = await Meteor.callAsync("getTranslations", { tokens });
 
             // Mutate elements
