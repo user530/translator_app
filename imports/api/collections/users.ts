@@ -1,4 +1,4 @@
-import {Mongo} from "meteor/mongo"
+import { Mongo } from "meteor/mongo"
 
 export interface User {
     id?: number;
@@ -7,4 +7,4 @@ export interface User {
     position: string;
 }
 
-export const UsersCollection = new Mongo.Collection<User>("allUsers");
+export const UsersCollection = new Mongo.Collection<User>("allCustomers");

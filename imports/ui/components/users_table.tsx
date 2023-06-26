@@ -9,7 +9,7 @@ const UsersTable: React.FC = () => {
     const tableRef = React.useRef<HTMLTableElement>(null);
 
     // Vlasky subscription
-    const isLoading: boolean = useSubscribe('allUsers')();
+    const isLoading: boolean = useSubscribe('allCustomers')();
     const users: User[] = useFind<User>(() => UsersCollection.find());
 
     // Translator custom hook
