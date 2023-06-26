@@ -1,8 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { TranslationDict } from '/imports/api/methods'
-import { callMyMethod } from '/imports/api/helpers'
-
 
 export const useTranslator = () => {
 
